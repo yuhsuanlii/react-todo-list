@@ -2,7 +2,7 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    
+
     entry: './src/index.js',
 
     output: {
@@ -27,6 +27,17 @@ module.exports = {
                         presets: ['@babel/preset-env', '@babel/preset-react']
                     }
                 }
+            },
+            {
+                test: /\.css$/,
+                exclude: /node_modules/,
+                use: ['style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                        }
+                    }
+                ]
             }
         ]
     }

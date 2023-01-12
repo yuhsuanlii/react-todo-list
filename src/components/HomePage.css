@@ -1,0 +1,17 @@
+.HomePageNav{
+    background-color: #223343;
+    color: #E8E8E8;
+    height: 150px;
+    padding-top: 10px;
+    line-height: 140px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.HomePageMain{
+    background-color: #CCDDED;
+    height: 500px;
+    line-height: 500px;
+    font-size: 28px;
+    font-weight: 500;
+}
