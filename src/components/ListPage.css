@@ -1,0 +1,40 @@
+.ListPageNav{
+    background-color: #FFFFFF;
+    color: black;
+    height: 150px;
+    padding-top: 10px;
+    line-height: 140px;
+    font-size: 28px;
+    font-weight: 700;
+    border-bottom: #e8e8e8 2px solid;
+}
+
+.ListPageMain{
+    background-color: #FFFFFF;
+    width: 330px;
+    margin: auto;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 20px;
+    text-align: left;
+    margin-bottom: 80px;
+}
+
+.ListPageinput{
+    width: 200px;
+    padding: 10px 20px 10px 20px;
+    font-size: 16px;
+}
+
+.ListPageButton{
+    margin-left: 10px;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.deletebtn{
+    margin-left: 30px;
+    padding: 5px 10px 5px 10px;
+    font-size: 16px;
+    float: right;
+}
