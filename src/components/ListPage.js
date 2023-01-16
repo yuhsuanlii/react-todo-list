@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from 'react';
-import "./ListPage.css"
+import "./ListPage.css";
+import {Link} from "react-router-dom";
 
 const ListPage = () => {
     const [tasks, setTasks] = useState([]);
@@ -36,6 +37,7 @@ const ListPage = () => {
                     </p>
                 ))}
             </div>
+            <Link to="/"><button className="hbtn">返回首頁</button></Link>
         </div>
     )
 }
