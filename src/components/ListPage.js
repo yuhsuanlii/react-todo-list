@@ -1,39 +1,61 @@
 import React from "react";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import "./ListPage.css";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { addDoc, collection, deleteDoc, onSnapshot, query, doc } from "firebase/firestore";
+import { db } from '/src/firebase'
 
 const ListPage = () => {
     const [tasks, setTasks] = useState([]);
     const [newTask, setNewTask] = useState("");
 
-    const addTask = () => {
-        if(newTask.trim() !== ""){
-            setTasks([...tasks, newTask]);
+    // create
+    const createTodo = async (e) => {
+        e.preventDefault(e);
+        if (newTask.trim() !== "") {
+            await addDoc(collection(db, 'todos'), {
+                text: newTask
+            })
             setNewTask("");
-          }
-    };
+        }
+    }
 
-    const removeTask = (index) => {
-        setTasks(tasks.filter((task, i) => i !== index));
+    // read 
+    useEffect(() => {
+        const q = query(collection(db, 'todos'));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            let todosArr = []
+            querySnapshot.forEach((doc) => {
+                todosArr.push({ ...doc.data(), id: doc.id })
+            });
+            setTasks(todosArr)
+        })
+        return () => unsubscribe()
+    }, [])
+
+    // delete
+    const deleteTodo = async (id) => {
+        await deleteDoc(doc(db, 'todos', id))
     }
 
     return (
         <div>
             <nav className="ListPageNav">
-                <input
-                    value={newTask}
-                    onChange={e => setNewTask(e.target.value)}
-                    type="text"
-                    placeholder="測試紀錄"
-                    className="ListPageinput"
-                />
-                <button className="ListPageButton" onClick={addTask}>新增紀錄</button>
+                <form onSubmit={createTodo}>
+                    <input
+                        value={newTask}
+                        onChange={(e) => setNewTask(e.target.value)}
+                        type="text"
+                        placeholder="測試紀錄"
+                        className="ListPageinput"
+                    />
+                    <button className="ListPageButton">新增紀錄</button>
+                </form>
             </nav>
-            <div class="ListPageMain">
+            <div className="ListPageMain">
                 {tasks.map((task, index) => (
-                    <p key={index}>{task}
-                        <button className="deletebtn" onClick={() => removeTask(index)}>刪除</button>
+                    <p className="onetask" key={index}>{task.text}
+                        <button className="deletebtn" onClick={() => deleteTodo(task.id)}>刪除</button>
                     </p>
                 ))}
             </div>
