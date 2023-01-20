@@ -1,21 +1,23 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import HomePage from './components/HomePage';
 import ListPage from './components/ListPage';
 import "./index.css"
-import { useState } from 'react';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <HomePage />,
+    },
+    {
+        path: "list",
+        element: <ListPage />,
+    },
+]);
 
-const App = () => {
-    const [currentPage, setCurrentPage] = useState("home");
-    return (
-        <div>
-            {currentPage === "home" && <HomePage />}
-            {currentPage === "list" && <ListPage />}
-            {currentPage === "home" && <button className="lbtn" onClick={() => setCurrentPage("list")}>點此開始</button>}
-            {currentPage === "list" && <button className="hbtn" onClick={() => setCurrentPage("home")}>返回首頁</button>}
-        </div>
-    );
-}
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.createRoot(document.getElementById("root")).render(
+    <React.StrictMode>
+        <RouterProvider router={router} />
+    </React.StrictMode>
+);

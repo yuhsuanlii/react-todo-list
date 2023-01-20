@@ -10,8 +10,14 @@
 
 .HomePageMain{
     background-color: #CCDDED;
-    height: 500px;
-    line-height: 500px;
+    height: 450px;
+    line-height: 450px;
     font-size: 28px;
     font-weight: 500;
+}
+
+.lbtn{
+    font-size: 16px;
+    padding: 8px 10px 8px 10px;
+    margin-top: 30px;
 }
